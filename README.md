@@ -36,14 +36,13 @@ build/Algorithms
 - SinglyNode
 - TrieNode
 
-### Tree-like structure
+### Tree-like structures
 - BinaryHeap
 - BinarySearchTree
 - Trie
 
 
 ## Planned:
-
 - Graphs
 - FibonacciHeap
 - AVLTree
