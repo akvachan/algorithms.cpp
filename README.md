@@ -15,4 +15,41 @@ cmake --build build --parallel 10
 build/Algorithms
 ```
 
+## Currently implemented:
+
+### Sort
+- BubbleSort
+- InsertionSort
+- QuickSort
+
+### Linear structures
+- Deque
+- DynamicArray
+- LinkedList
+- RingBuffer
+
+### Node structures
+- BinaryNode
+- DoublyGraphNode
+- DoublyNode
+- GraphNode
+- SinglyNode
+- TrieNode
+
+### Tree-like structure
+- BinaryHeap
+- BinarySearchTree
+- Trie
+
+
+## Planned:
+
+- Graphs
+- FibonacciHeap
+- AVLTree
+- RedBlackTree
+- BinarySearch
+- LinearSearch
+
+
 
