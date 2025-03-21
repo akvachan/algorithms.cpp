@@ -43,6 +43,8 @@ build/Algorithms
 
 
 ## Planned:
+
+### Implementations
 - Graphs
 - FibonacciHeap
 - AVLTree
@@ -50,5 +52,6 @@ build/Algorithms
 - BinarySearch
 - LinearSearch
 
-
-
+### Features
+- Single header file for everything
+- Make build for MacOS and Linux
