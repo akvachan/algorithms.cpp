@@ -15,7 +15,7 @@ cmake --build build --parallel 10
 build/Algorithms
 ```
 
-## Currently implemented:
+## Currently implemented
 
 ### Sort
 - BubbleSort
@@ -42,7 +42,7 @@ build/Algorithms
 - Trie
 
 
-## Planned:
+## Planned
 
 ### Implementations
 - Graphs
