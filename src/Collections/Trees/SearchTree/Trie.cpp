@@ -14,10 +14,14 @@ class Trie {
 public:
   Trie() : _root(new TrieNode()) {}
 
+  // DESTRUCTOR
   // ~Trie() {
   //   // clean up the whole trie before deleting the root!!!
   //   delete _root;
   // }
+
+  // COPY CONSTRUCTOR + ASSIGNMENT, MOVE CONSTRUCTOR + ASSIGNMENT
+  
   inline size_t getSize() const { return _size; }
 
   std::optional<int> search(const std::string_view &key) const {

@@ -41,8 +41,8 @@ public:
     const int& operator[](int i) const;
 
     // Modification
-    void pushback(int n);
-    int popback();
+    void append(int n);
+    int pop();
     void resize();
 
     // Size and Capacity

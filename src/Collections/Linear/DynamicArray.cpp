@@ -90,13 +90,13 @@ int &DynamicArray::operator[](int i) { return _array[i]; }
 const int &DynamicArray::operator[](int i) const { return _array[i]; }
 
 // Modification
-void DynamicArray::pushback(int n) {
+void DynamicArray::append(int n) {
   if (_size == _capacity)
     resize();
   _array[_size++] = n;
 }
 
-int DynamicArray::popback() { return _array[--_size]; }
+int DynamicArray::pop() { return _array[--_size]; }
 
 void DynamicArray::resize() {
   int newCapacity = _capacity * 2;

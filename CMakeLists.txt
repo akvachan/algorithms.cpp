@@ -9,8 +9,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
-file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/Src/*.cpp")
-file(GLOB_RECURSE HEADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/Src/*.hpp")
+file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE HEADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp")
 
 set(INCLUDE_DIRS "")
 foreach(header IN LISTS HEADER_FILES)

@@ -53,5 +53,6 @@ build/Algorithms
 - LinearSearch
 
 ### Features
+- Templating each implementation
 - Single header file for everything
-- Make build for MacOS and Linux
+- GNU Make build for MacOS and Linux

@@ -47,8 +47,10 @@ BinarySearchTree &BinarySearchTree::operator=(BinarySearchTree &&other) noexcept
 }
 
 // Traverse method
-void BinarySearchTree::traverse(std::vector<int> &path) const {
+std::vector<int> BinarySearchTree::traverse() const {
+    std::vector<int> path;
     _traverseHelper(_root, path);
+    return path;
 }
 
 // Find method

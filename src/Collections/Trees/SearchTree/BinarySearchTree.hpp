@@ -41,7 +41,7 @@ public:
      * 
      * @param path A reference to a vector where the traversal path will be stored.
      */
-    void traverse(std::vector<int> &path) const;
+    std::vector<int> traverse() const;
 
     /**
      * @brief Check if a value exists in the tree.
@@ -71,7 +71,7 @@ public:
     void remove(int value);
 
 private:
-    BinaryNode *_root; /**< Pointer to the root node of the BST. */
+    BinaryNode *_root; 
 
     /**
      * @brief Find the largest child in the left subtree.
