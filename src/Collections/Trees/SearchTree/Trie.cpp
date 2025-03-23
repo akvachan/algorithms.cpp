@@ -1,7 +1,10 @@
 #include "TrieNode.hpp"
 
-#include <iostream>
+#include <codecvt>
+#include <ios>
+#include <string>
 #include <string_view>
+#include <vector>
 
 namespace ak_algos {
 
@@ -21,10 +24,10 @@ public:
   // }
 
   // COPY CONSTRUCTOR + ASSIGNMENT, MOVE CONSTRUCTOR + ASSIGNMENT
-  
+
   inline size_t getSize() const { return _size; }
 
-  std::optional<int> search(const std::string_view &key) const {
+  std::optional<int> getScore(const std::string_view &key) const {
     TrieNode *node = _root;
     for (const char c : key) {
       if (!node->getChild(c))
@@ -32,6 +35,16 @@ public:
       node = node->getChild(c);
     }
     return node->isTerminal() ? node->getScore() : std::optional<int>{};
+  }
+
+  bool search(const std::string_view &key) const {
+    TrieNode *node = _root;
+    for (const char c : key) {
+      if (!node->getChild(c))
+        return {};
+      node = node->getChild(c);
+    }
+    return node->isTerminal();
   }
 
   std::vector<TrieWord> complete(const std::string_view &prefix) const {
@@ -53,36 +66,29 @@ public:
   void insert(const std::string_view &key, const int score) {
     TrieNode *node = _root;
     for (const char c : key) {
-      if (!node->getChild(c)) {
+      if (!node->getChild(c))
         node->addChild(new TrieNode{c});
-      }
       node = node->getChild(c);
     }
+    if (!node->isTerminal())
+      _size++;
     node->setTerminal(true);
     node->setScore(score);
-    _size++;
   }
 
   void insert(const std::string_view &key) {
     TrieNode *node = _root;
     for (const char c : key) {
-      if (!node->getChild(c)) {
+      if (!node->getChild(c))
         node->addChild(new TrieNode{c});
-      }
       node = node->getChild(c);
     }
+    if (!node->isTerminal())
+      _size++;
     node->setTerminal(true);
-    _size++;
   }
 
-  int remove(const std::string_view &key) {
-    for (const char &c : key) {
-      // TODO
-      std::cout << c << std::endl;
-    }
-    _size--;
-    return 0;
-  }
+  void remove(const std::string_view &key) { _removeHelper(_root, key); }
 
   std::vector<TrieWord> traverse() const {
     std::vector<TrieWord> results;
@@ -96,6 +102,29 @@ private:
   TrieNode *_root;
   size_t _size;
 
+  void _removeHelper(TrieNode *currentNode, const std::string_view &key,
+                     size_t depth = 0) {
+    if (depth == key.size()) {
+      if (!currentNode->hasChildren()) {
+        delete currentNode;
+        currentNode = nullptr;
+        return;
+      }
+
+      if (currentNode->isTerminal()) {
+        currentNode->setTerminal(false);
+        _size--;
+        return;
+      }
+    }
+
+    currentNode = currentNode->getChild(key[depth]);
+    if (currentNode) 
+      _removeHelper(currentNode, key, ++depth);
+
+    return;
+  }
+
   void _traverseHelper(TrieNode *currentNode, std::string &baseString,
                        std::vector<TrieWord> &results) const {
 
@@ -104,18 +133,13 @@ private:
       return;
     }
 
-    if (currentNode->isTerminal()) {
+    if (currentNode->isTerminal())
       results.emplace_back(baseString, currentNode->getScore());
-    }
 
     for (TrieNode *childNode : currentNode->getChildren()) {
       if (childNode) {
-        if (childNode->getValue() != '\0') {
-          std::string str = baseString + childNode->getValue();
-          _traverseHelper(childNode, str, results);
-        } else {
-          _traverseHelper(childNode, baseString, results);
-        }
+        std::string newBaseString = baseString + childNode->getValue();
+        _traverseHelper(childNode, newBaseString, results);
       }
     }
   }

@@ -9,6 +9,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <ostream>
 #include <vector>
 
 int main() {
@@ -197,11 +198,11 @@ int main() {
             << std::endl;
 
   std::cout << "Remove 20" << '\n';
-  bst.remove(20); 
+  bst.remove(20);
   std::cout << "Remove 30" << '\n';
-  bst.remove(30); 
+  bst.remove(30);
   std::cout << "Remove 50" << '\n';
-  bst.remove(50); 
+  bst.remove(50);
 
   // Traverse the tree again
   path.clear();
@@ -253,6 +254,7 @@ int main() {
   trie.insert("go"sv, 30);
   trie.insert("game"sv, 1);
   trie.insert("apple"sv, 6);
+  trie.insert("apple"sv, 10);
   trie.insert("asterisk"sv);
   trie.insert("aprehended"sv);
   trie.insert("approved"sv);
@@ -266,8 +268,11 @@ int main() {
   std::cout << "\nSize of the trie: " << std::endl;
   std::cout << trie.getSize() << std::endl;
 
-  std::cout << "\nSearch for 'game': " << std::endl;
-  auto result = trie.search("game"sv);
+  std::cout << "\nSearch for 'germany': " << std::endl;
+  std::cout << trie.search("germany"sv) << std::endl;
+
+  std::cout << "\nScore for 'apple': " << std::endl;
+  auto result = trie.getScore("apple"sv);
   if (result.has_value())
     std::cout << result.value() << std::endl;
 
@@ -279,14 +284,43 @@ int main() {
     else
       std::cout << trieWord.word << std::endl;
 
-  std::cout << "\nCompletions of 'ap': " << std::endl;
+  trie.insert("apprised"sv, 101);
+  trie.insert("gorod"sv, 101);
 
-  auto completions = trie.complete("ap"sv);
+  std::cout << "\nSize of the trie: " << std::endl;
+  std::cout << trie.getSize() << std::endl;
+
+  std::cout << "\nCompletions of 'go': " << std::endl;
+  auto completions = trie.complete("go"sv);
   for (ak_algos::TrieWord &trieWord : completions)
     if (trieWord.score.has_value())
       std::cout << trieWord.word << ", " << trieWord.score.value() << std::endl;
     else
       std::cout << trieWord.word << std::endl;
+
+  std::cout << "\nRemoving 'germany'" << std::endl;
+  trie.remove("germany"sv);
+
+  std::cout << "\nRemoving 'apple'" << std::endl;
+  trie.remove("apple"sv);
+
+  std::cout << "\nRemoving 'go'" << std::endl;
+  trie.remove("go"sv);
+
+  std::cout << "\nRemoving 'google'" << std::endl;
+  trie.remove("google"sv);
+
+  std::cout << "\nTraversal: " << std::endl;
+  results.clear();
+  results = trie.traverse();
+  for (ak_algos::TrieWord &trieWord : results)
+    if (trieWord.score.has_value())
+      std::cout << trieWord.word << ", " << trieWord.score.value() << std::endl;
+    else
+      std::cout << trieWord.word << std::endl;
+
+  std::cout << "\nSize of the trie: " << std::endl;
+  std::cout << trie.getSize() << std::endl;
 
   // -- }}}
 
