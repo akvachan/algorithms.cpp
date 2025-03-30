@@ -39,7 +39,7 @@ public:
     int back() const;
 
 private:
-    int _len;
+    int _length;
     DoublyNode *_startNode;
     DoublyNode *_endNode;
 };

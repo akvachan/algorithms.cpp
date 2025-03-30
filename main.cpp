@@ -26,7 +26,7 @@ int main() {
 
   for (int i = 1; i <= 7; ++i) {
     arr.append(i * 10);
-    std::cout << "Pushed: " << i * 10 << ", Size: " << arr.getSize()
+    std::cout << "Pushed: " << i * 10 << ", Size: " << arr.getLength()
               << ", Capacity: " << arr.getCapacity() << std::endl;
   }
 
@@ -36,9 +36,9 @@ int main() {
   }
   std::cout << std::endl;
 
-  while (arr.getSize() > 0) {
+  while (arr.getLength() > 0) {
     int val = arr.pop();
-    std::cout << "Popped: " << val << ", Size: " << arr.getSize()
+    std::cout << "Popped: " << val << ", Size: " << arr.getLength()
               << ", Capacity: " << arr.getCapacity() << std::endl;
   }
 
@@ -68,7 +68,7 @@ int main() {
   for (int val : values) {
     std::cout << val << " ";
   }
-  std::cout << "\nLength: " << list.getLen() << "\n";
+  std::cout << "\nLength: " << list.getLength() << "\n";
 
   list.removeAt(1);
 
@@ -76,7 +76,7 @@ int main() {
   for (int val : values) {
     std::cout << val << " ";
   }
-  std::cout << "\nLength: " << list.getLen() << "\n";
+  std::cout << "\nLength: " << list.getLength() << "\n";
 
   // }}}
 
@@ -128,27 +128,27 @@ int main() {
   // Create a ring buffer with capacity 3
   ak_algos::RingBuffer rb(3);
 
-  rb.enque(10);
-  rb.enque(20);
-  rb.enque(30);
+  rb.push(10);
+  rb.push(20);
+  rb.push(30);
 
-  std::cout << "Size after 3 enqueues: " << rb.getSize() << std::endl;
+  std::cout << "Length after 3 enqueues: " << rb.getLength() << std::endl;
 
-  rb.enque(40);
+  rb.push(40);
 
-  std::cout << "Dequeued value: " << rb.deque() << std::endl;
-  std::cout << "Size after dequeue: " << rb.getSize() << std::endl;
+  std::cout << "Dequeued value: " << rb.pop() << std::endl;
+  std::cout << "Length after dequeue: " << rb.getLength() << std::endl;
 
-  rb.enque(50);
-  rb.enque(60);
+  rb.push(50);
+  rb.push(60);
 
-  while (rb.getSize() > 0) {
-    std::cout << "Dequeued value: " << rb.deque() << std::endl;
+  while (rb.getLength() > 0) {
+    std::cout << "Dequeued value: " << rb.pop() << std::endl;
   }
 
   // Attempting to dequeue from an empty buffer will throw an exception
   try {
-    rb.deque();
+    rb.pop();
   } catch (const std::exception &e) {
     std::cout << "Exception: " << e.what() << std::endl;
   }
@@ -266,16 +266,16 @@ int main() {
   trie.insert("gorod"sv);
   trie.insert("zarian"sv);
 
-  std::cout << "\nSize of the trie: " << std::endl;
-  std::cout << trie.getSize() << std::endl;
+  std::cout << "Size of the trie: " << trie.getKeysCount() << std::endl;
 
-  std::cout << "\nSearch for 'germany': " << std::endl;
-  std::cout << trie.search("germany"sv) << std::endl;
+  std::cout << "Search for 'germany': " << trie.search("germany"sv) << std::endl;
 
-  std::cout << "\nScore for 'apple': " << std::endl;
+  std::cout << "Score for 'apple': ";
   auto result = trie.getScore("apple"sv);
   if (result.has_value())
     std::cout << result.value() << std::endl;
+  else 
+    std::cout << "None" << std::endl;
 
   std::cout << "\nTraversal: " << std::endl;
   std::vector<ak_algos::TrieWord> results = trie.traverse();
@@ -288,8 +288,7 @@ int main() {
   trie.insert("apprised"sv, 101);
   trie.insert("gorod"sv, 101);
 
-  std::cout << "\nSize of the trie: " << std::endl;
-  std::cout << trie.getSize() << std::endl;
+  std::cout << "\nSize of the trie: " << trie.getKeysCount() << std::endl;
 
   std::cout << "\nCompletions of 'go': " << std::endl;
   auto completions = trie.complete("go"sv);
@@ -302,13 +301,13 @@ int main() {
   std::cout << "\nRemoving 'germany'" << std::endl;
   trie.remove("germany"sv);
 
-  std::cout << "\nRemoving 'apple'" << std::endl;
+  std::cout << "Removing 'apple'" << std::endl;
   trie.remove("apple"sv);
 
-  std::cout << "\nRemoving 'go'" << std::endl;
+  std::cout << "Removing 'go'" << std::endl;
   trie.remove("go"sv);
 
-  std::cout << "\nRemoving 'google'" << std::endl;
+  std::cout << "Removing 'google'" << std::endl;
   trie.remove("google"sv);
 
   std::cout << "\nTraversal: " << std::endl;
@@ -320,14 +319,9 @@ int main() {
     else
       std::cout << trieWord.word << std::endl;
 
-  std::cout << "\nSize of the trie: " << std::endl;
-  std::cout << trie.getSize() << std::endl;
-
-  std::cout << "\nSearch for 'germany': " << std::endl;
-  std::cout << trie.search("germany"sv) << std::endl;
-
-  std::cout << "\nSearch for 'go': " << std::endl;
-  std::cout << trie.search("go"sv) << std::endl;
+  std::cout << "\nSize of the trie: " << trie.getKeysCount() << std::endl;
+  std::cout << "Search for 'germany': " << trie.search("germany"sv) << std::endl;
+  std::cout << "Search for 'go': " << trie.search("go"sv) << std::endl;
 
   // -- }}}
 
@@ -343,11 +337,11 @@ int main() {
   auto charResult = ak_algos::binarySearch<char>(someChars, 'a');
   auto intResult = ak_algos::binarySearch<int>(someInts, 3);
 
-  std::cout << "\nSearch for 'c': " << std::endl;
+  std::cout << "Search for 'c': ";
   if (charResult.has_value()) 
     std::cout << charResult.value() << std::endl;
 
-  std::cout << "\nSearch for '3': " << std::endl;
+  std::cout << "Search for '3': ";
   if (intResult.has_value()) 
     std::cout << intResult.value() << std::endl;
 

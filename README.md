@@ -28,7 +28,7 @@ build/Algorithms
 ### Linear structures
 - Deque
 - DynamicArray
-- LinkedList
+- SinglyLinkedList
 - RingBuffer
 
 ### Node structures

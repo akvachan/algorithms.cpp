@@ -3,7 +3,7 @@
 namespace ak_algos {
 
 // Constructor
-Deque::Deque() : _len(0), _startNode(nullptr), _endNode(nullptr) {}
+Deque::Deque() : _length(0), _startNode(nullptr), _endNode(nullptr) {}
 
 // Destructor
 Deque::~Deque() {
@@ -13,11 +13,11 @@ Deque::~Deque() {
         delete temp;
     }
     _endNode = nullptr;
-    _len = 0;
+    _length = 0;
 }
 
 // Copy Constructor
-Deque::Deque(const Deque &other) : _len(0), _startNode(nullptr), _endNode(nullptr) {
+Deque::Deque(const Deque &other) : _length(0), _startNode(nullptr), _endNode(nullptr) {
     DoublyNode *current = other._startNode;
     while (current != nullptr) {
         pushBack(current->val);
@@ -35,7 +35,7 @@ Deque &Deque::operator=(const Deque &other) {
             delete temp;
         }
         _endNode = nullptr;
-        _len = 0;
+        _length = 0;
 
         // Copy nodes from other
         DoublyNode *current = other._startNode;
@@ -49,8 +49,8 @@ Deque &Deque::operator=(const Deque &other) {
 
 // Move Constructor
 Deque::Deque(Deque &&other) noexcept
-    : _len(other._len), _startNode(other._startNode), _endNode(other._endNode) {
-    other._len = 0;
+    : _length(other._length), _startNode(other._startNode), _endNode(other._endNode) {
+    other._length = 0;
     other._startNode = nullptr;
     other._endNode = nullptr;
 }
@@ -66,12 +66,12 @@ Deque &Deque::operator=(Deque &&other) noexcept {
         }
 
         // Transfer ownership
-        _len = other._len;
+        _length = other._length;
         _startNode = other._startNode;
         _endNode = other._endNode;
 
         // Nullify the other
-        other._len = 0;
+        other._length = 0;
         other._startNode = nullptr;
         other._endNode = nullptr;
     }
@@ -89,10 +89,10 @@ void Deque::pushBack(int val) {
     _endNode = newNode;
 
     // If new node is the first node, then it is also a start node
-    if (_len == 0)
+    if (_length == 0)
         _startNode = _endNode;
 
-    _len++;
+    _length++;
 }
 
 // Push Front
@@ -106,15 +106,15 @@ void Deque::pushFront(int val) {
     _startNode = newNode;
 
     // If new node is the first node, then it is also an end node
-    if (_len == 0)
+    if (_length == 0)
         _endNode = _startNode;
 
-    _len++;
+    _length++;
 }
 
 // Pop Back
 int Deque::popBack() {
-    if (_len == 0)
+    if (_length == 0)
       return -1;
 
     DoublyNode *tmpNode = _endNode;
@@ -125,19 +125,19 @@ int Deque::popBack() {
         _endNode->next = nullptr;
     }
 
-    if (_len == 1) {
+    if (_length == 1) {
         _startNode = nullptr;
     }
 
     delete tmpNode;
-    _len--;
+    _length--;
 
     return val;
 }
 
 // Pop Front
 int Deque::popFront() {
-    if (_len == 0)
+    if (_length == 0)
         return -1;
 
     DoublyNode *tmpNode = _startNode;
@@ -148,12 +148,12 @@ int Deque::popFront() {
         _startNode->prev = nullptr; // Corrected condition to check _startNode
     }
 
-    if (_len == 1) {
+    if (_length == 1) {
         _endNode = nullptr;
     }
 
     delete tmpNode;
-    _len--;
+    _length--;
 
     return val;
 }

@@ -4,16 +4,16 @@
 namespace ak_algos {
 
 DynamicArray::DynamicArray(int capacity)
-    : _size(0), _capacity(capacity), _array(new int[capacity]()) {}
+    : _length(0), _capacity(capacity), _array(new int[capacity]()) {}
 
 // Destructor
 DynamicArray::~DynamicArray() { delete[] _array; }
 
 // Copy Constructor
 DynamicArray::DynamicArray(const DynamicArray &other)
-    : _size(other._size), _capacity(other._capacity),
+    : _length(other._length), _capacity(other._capacity),
       _array(new int[other._capacity]()) {
-  for (int i = 0; i < _size; ++i) {
+  for (int i = 0; i < _length; ++i) {
     _array[i] = other._array[i];
   }
 }
@@ -24,13 +24,13 @@ DynamicArray &DynamicArray::operator=(const DynamicArray &other) {
     return *this;
 
   int *newArray = new int[other._capacity]();
-  for (int i = 0; i < other._size; ++i) {
+  for (int i = 0; i < other._length; ++i) {
     newArray[i] = other._array[i];
   }
 
   delete[] _array;
 
-  _size = other._size;
+  _length = other._length;
   _capacity = other._capacity;
   _array = newArray;
 
@@ -39,8 +39,8 @@ DynamicArray &DynamicArray::operator=(const DynamicArray &other) {
 
 // Move Constructor
 DynamicArray::DynamicArray(DynamicArray &&other) noexcept
-    : _size(other._size), _capacity(other._capacity), _array(other._array) {
-  other._size = 0;
+    : _length(other._length), _capacity(other._capacity), _array(other._array) {
+  other._length = 0;
   other._capacity = 0;
   other._array = nullptr;
 }
@@ -52,11 +52,11 @@ DynamicArray &DynamicArray::operator=(DynamicArray &&other) noexcept {
 
   delete[] _array;
 
-  _size = other._size;
+  _length = other._length;
   _capacity = other._capacity;
   _array = other._array;
 
-  other._size = 0;
+  other._length = 0;
   other._capacity = 0;
   other._array = nullptr;
 
@@ -66,18 +66,18 @@ DynamicArray &DynamicArray::operator=(DynamicArray &&other) noexcept {
 // Iterator Definitions
 DynamicArray::iterator DynamicArray::begin() { return _array; }
 
-DynamicArray::iterator DynamicArray::end() { return _array + _size; }
+DynamicArray::iterator DynamicArray::end() { return _array + _length; }
 
 DynamicArray::const_iterator DynamicArray::begin() const { return _array; }
 
 DynamicArray::const_iterator DynamicArray::end() const {
-  return _array + _size;
+  return _array + _length;
 }
 
 DynamicArray::const_iterator DynamicArray::cbegin() const { return _array; }
 
 DynamicArray::const_iterator DynamicArray::cend() const {
-  return _array + _size;
+  return _array + _length;
 }
 
 // Element Access
@@ -91,18 +91,18 @@ const int &DynamicArray::operator[](int i) const { return _array[i]; }
 
 // Modification
 void DynamicArray::append(int n) {
-  if (_size == _capacity)
+  if (_length == _capacity)
     resize();
-  _array[_size++] = n;
+  _array[_length++] = n;
 }
 
-int DynamicArray::pop() { return _array[--_size]; }
+int DynamicArray::pop() { return _array[--_length]; }
 
 void DynamicArray::resize() {
   int newCapacity = _capacity * 2;
   int *newArray = new int[newCapacity]();
 
-  for (int i = 0; i < _size; i++)
+  for (int i = 0; i < _length; i++)
     newArray[i] = _array[i];
 
   delete[] _array;
@@ -112,7 +112,7 @@ void DynamicArray::resize() {
 }
 
 // Size and Capacity
-int DynamicArray::getSize() const { return _size; }
+int DynamicArray::getLength() const { return _length; }
 
 int DynamicArray::getCapacity() const { return _capacity; }
 

@@ -46,11 +46,11 @@ public:
     void resize();
 
     // Size and Capacity
-    int getSize() const;
+    int getLength() const;
     int getCapacity() const;
 
 private:
-    int _size;
+    int _length;
     int _capacity;
     int* _array;
 };

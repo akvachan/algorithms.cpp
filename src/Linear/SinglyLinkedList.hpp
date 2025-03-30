@@ -14,7 +14,7 @@ public:
   ~SinglyLinkedList(); // Destructor
 
   int get(int index) const; // Get value by index
-  int getLen() const;       // Get length of the list
+  int getLength() const;       // Get length of the list
 
   void insertAt(int index, int val); // Insert at arbitrary index 
   void insertHead(int val); // Insert at the head

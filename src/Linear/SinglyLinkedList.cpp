@@ -29,7 +29,7 @@ int SinglyLinkedList::get(int index) const {
 }
 
 // Get length of the list
-int SinglyLinkedList::getLen() const { return _len; }
+int SinglyLinkedList::getLength() const { return _len; }
 
 // Insert at the head
 void SinglyLinkedList::insertHead(int val) {

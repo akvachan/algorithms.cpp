@@ -1,7 +1,5 @@
 #include "TrieNode.hpp"
 
-#include <codecvt>
-#include <ios>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -25,7 +23,7 @@ public:
 
   // COPY CONSTRUCTOR + ASSIGNMENT, MOVE CONSTRUCTOR + ASSIGNMENT
 
-  inline size_t getSize() const { return _size; }
+  inline size_t getKeysCount() const { return _keysCount; }
 
   std::optional<int> getScore(const std::string_view &key) const {
     TrieNode *node = _root;
@@ -71,7 +69,7 @@ public:
       node = node->getChild(c);
     }
     if (!node->isTerminal())
-      _size++;
+      _keysCount++;
     node->setTerminal(true);
     node->setScore(score);
   }
@@ -84,7 +82,7 @@ public:
       node = node->getChild(c);
     }
     if (!node->isTerminal())
-      _size++;
+      _keysCount++;
     node->setTerminal(true);
   }
 
@@ -93,14 +91,14 @@ public:
   std::vector<TrieWord> traverse() const {
     std::vector<TrieWord> results;
     std::string str = "";
-    results.reserve(_size);
+    results.reserve(_keysCount);
     _traverseHelper(_root, str, results);
     return results;
   }
 
 private:
   TrieNode *_root;
-  size_t _size;
+  size_t _keysCount;
 
   void _removeHelper(TrieNode *currentNode, const std::string_view &key,
                      size_t depth = 0) {
@@ -113,7 +111,7 @@ private:
 
       if (currentNode->isTerminal()) {
         currentNode->setTerminal(false);
-        _size--;
+        _keysCount--;
         return;
       }
     }
