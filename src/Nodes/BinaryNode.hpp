@@ -3,12 +3,9 @@
 
 namespace ak_algos {
 
-// Binary Node structure
 struct BinaryNode {
-
-  // Constructor
-  BinaryNode(int val) : left(nullptr), right(nullptr), val(val) {}
-  BinaryNode() : left(nullptr), right(nullptr), val(0) {}
+  BinaryNode(int val);
+  BinaryNode();
 
   BinaryNode *left;
   BinaryNode *right;

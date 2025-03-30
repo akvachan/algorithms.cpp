@@ -17,6 +17,9 @@ build/Algorithms
 
 ## Currently implemented
 
+### Search
+- BinarySearch
+
 ### Sort
 - BubbleSort
 - InsertionSort
@@ -30,9 +33,7 @@ build/Algorithms
 
 ### Node structures
 - BinaryNode
-- DoublyGraphNode
 - DoublyNode
-- GraphNode
 - SinglyNode
 - TrieNode
 
@@ -49,8 +50,6 @@ build/Algorithms
 - FibonacciHeap
 - AVLTree
 - RedBlackTree
-- BinarySearch
-- LinearSearch
 
 ### Features
 - Templating each implementation

@@ -1,8 +1,9 @@
-#include "BinaryHeap.hpp"
+#include "BinarySearch.hpp"
 #include "BinarySearchTree.hpp"
+#include "BinaryHeap.hpp"
 #include "Deque.hpp"
 #include "DynamicArray.hpp"
-#include "LinkedList.hpp"
+#include "SinglyLinkedList.hpp"
 #include "QuickSort.hpp"
 #include "RingBuffer.hpp"
 #include "Trie.cpp"
@@ -50,13 +51,13 @@ int main() {
 
   // }}}
 
-  // LinkedList {{{
+  // SinglyLinkedList {{{
 
   std::cout << "\n-------------------------" << std::endl;
-  std::cout << "LinkedList Demo" << std::endl;
+  std::cout << "SinglyLinkedList Demo" << std::endl;
   std::cout << "-------------------------\n" << std::endl;
 
-  ak_algos::LinkedList list;
+  ak_algos::SinglyLinkedList list;
 
   list.insertHead(1);
   list.insertTail(2);
@@ -170,10 +171,10 @@ int main() {
 
   // }}}
 
-  //  Binary Search Tree {{{
+  //  BinarySearchTree {{{
 
   std::cout << "\n-------------------------" << std::endl;
-  std::cout << "Binary Search Tree Demo" << std::endl;
+  std::cout << "BinarySearchTree Demo" << std::endl;
   std::cout << "-------------------------\n" << std::endl;
 
   ak_algos::BinarySearchTree bst;
@@ -214,10 +215,10 @@ int main() {
 
   // -- }}}
 
-  //  Binary Heap {{{
+  //  BinaryHeap {{{
 
   std::cout << "\n-------------------------" << std::endl;
-  std::cout << "Binary Heap Demo" << std::endl;
+  std::cout << "BinaryHeap Demo" << std::endl;
   std::cout << "-------------------------\n" << std::endl;
 
   ak_algos::BinaryHeap minHeap;
@@ -322,7 +323,35 @@ int main() {
   std::cout << "\nSize of the trie: " << std::endl;
   std::cout << trie.getSize() << std::endl;
 
+  std::cout << "\nSearch for 'germany': " << std::endl;
+  std::cout << trie.search("germany"sv) << std::endl;
+
+  std::cout << "\nSearch for 'go': " << std::endl;
+  std::cout << trie.search("go"sv) << std::endl;
+
   // -- }}}
+
+  // BinarySearch {{{
+
+  std::cout << "\n-------------------------" << std::endl;
+  std::cout << "BinarySearch Demo" << std::endl;
+  std::cout << "-------------------------\n" << std::endl;
+
+  std::vector<char> someChars{'a', 'b', 'c', 'd', 'e', 'f'};
+  std::vector<int> someInts{1, 2, 3, 4, 5};
+
+  auto charResult = ak_algos::binarySearch<char>(someChars, 'a');
+  auto intResult = ak_algos::binarySearch<int>(someInts, 3);
+
+  std::cout << "\nSearch for 'c': " << std::endl;
+  if (charResult.has_value()) 
+    std::cout << charResult.value() << std::endl;
+
+  std::cout << "\nSearch for '3': " << std::endl;
+  if (intResult.has_value()) 
+    std::cout << intResult.value() << std::endl;
+
+  // }}}
 
   return 0;
 }

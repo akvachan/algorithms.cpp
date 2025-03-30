@@ -8,10 +8,10 @@
 
 namespace ak_algos {
 
-class LinkedList {
+class SinglyLinkedList {
 public:
-  LinkedList();  // Constructor
-  ~LinkedList(); // Destructor
+  SinglyLinkedList();  // Constructor
+  ~SinglyLinkedList(); // Destructor
 
   int get(int index) const; // Get value by index
   int getLen() const;       // Get length of the list

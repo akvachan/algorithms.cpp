@@ -1,13 +1,13 @@
-#include "LinkedList.hpp"
+#include "SinglyLinkedList.hpp"
 #include "SinglyNode.hpp"
 
 namespace ak_algos {
 
 // Constructor
-LinkedList::LinkedList() : _len(0), _startNode(nullptr), _endNode(nullptr) {}
+SinglyLinkedList::SinglyLinkedList() : _len(0), _startNode(nullptr), _endNode(nullptr) {}
 
 // Destructor
-LinkedList::~LinkedList() {
+SinglyLinkedList::~SinglyLinkedList() {
   while (_startNode) {
     SinglyNode *temp = _startNode;
     _startNode = _startNode->next;
@@ -16,7 +16,7 @@ LinkedList::~LinkedList() {
 }
 
 // Get value by index
-int LinkedList::get(int index) const {
+int SinglyLinkedList::get(int index) const {
   if (index < 0 || index >= _len)
     return -1;
 
@@ -29,10 +29,10 @@ int LinkedList::get(int index) const {
 }
 
 // Get length of the list
-int LinkedList::getLen() const { return _len; }
+int SinglyLinkedList::getLen() const { return _len; }
 
 // Insert at the head
-void LinkedList::insertHead(int val) {
+void SinglyLinkedList::insertHead(int val) {
   SinglyNode *newHead = new SinglyNode(_startNode, val);
   if (_len == 0) {
     _endNode = newHead;
@@ -42,7 +42,7 @@ void LinkedList::insertHead(int val) {
 }
 
 // Insert at the tail
-void LinkedList::insertTail(int val) {
+void SinglyLinkedList::insertTail(int val) {
   SinglyNode *newTail = new SinglyNode(nullptr, val);
   if (_len == 0) {
     _startNode = newTail;
@@ -53,7 +53,7 @@ void LinkedList::insertTail(int val) {
   _len++;
 }
 
-void LinkedList::insertAt(int index, int val) {
+void SinglyLinkedList::insertAt(int index, int val) {
   if (index == 0)
     insertHead(val);
   else if (index == _len)
@@ -74,7 +74,7 @@ void LinkedList::insertAt(int index, int val) {
 }
 
 // Remove node by index
-bool LinkedList::removeAt(int index) {
+bool SinglyLinkedList::removeAt(int index) {
   if (index < 0 || index >= _len)
     return false;
 
@@ -107,7 +107,7 @@ bool LinkedList::removeAt(int index) {
 }
 
 // Get all values as a vector
-std::vector<int> LinkedList::getValues() const {
+std::vector<int> SinglyLinkedList::getValues() const {
   std::vector<int> values;
   SinglyNode *currNode = _startNode;
   while (currNode) {
