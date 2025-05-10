@@ -18,19 +18,22 @@ public:
    * @param isTerminal Whether the node marks the end of a word.
    */
   TrieNode(char value, int score, bool isTerminal)
-      : _value(value), _score({score}),
-        _isTerminal(isTerminal), _children({}) {}
+      : _value(value), _score({score}), _isTerminal(isTerminal), _children({}) {
+  }
 
   /**
    * @brief Constructs a trie node with default values.
    */
-  TrieNode() : _value('\0'), _score(std::optional<int>{}), _isTerminal(false), _children({}) {}
+  TrieNode()
+      : _value('\0'), _score(std::optional<int>{}), _isTerminal(false),
+        _children({}) {}
 
   /**
    * @brief Constructs a trie node with value.
    */
   TrieNode(char value)
-      : _value(value), _score(std::optional<int>{}), _isTerminal(false), _children({}) {}
+      : _value(value), _score(std::optional<int>{}), _isTerminal(false),
+        _children({}) {}
 
   // Allow shallow copy operations
   TrieNode(const TrieNode &) = default;

@@ -1,12 +1,13 @@
+#include "BinaryHeap.hpp"
 #include "BinarySearch.hpp"
 #include "BinarySearchTree.hpp"
-#include "BinaryHeap.hpp"
 #include "Deque.hpp"
 #include "DynamicArray.hpp"
-#include "SinglyLinkedList.hpp"
 #include "QuickSort.hpp"
 #include "RingBuffer.hpp"
-#include "Trie.cpp"
+#include "SinglyLinkedList.hpp"
+#include "Traversal.hpp"
+#include "Trie.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -268,13 +269,14 @@ int main() {
 
   std::cout << "Size of the trie: " << trie.getKeysCount() << std::endl;
 
-  std::cout << "Search for 'germany': " << trie.search("germany"sv) << std::endl;
+  std::cout << "Search for 'germany': " << trie.search("germany"sv)
+            << std::endl;
 
   std::cout << "Score for 'apple': ";
   auto result = trie.getScore("apple"sv);
   if (result.has_value())
     std::cout << result.value() << std::endl;
-  else 
+  else
     std::cout << "None" << std::endl;
 
   std::cout << "\nTraversal: " << std::endl;
@@ -320,7 +322,8 @@ int main() {
       std::cout << trieWord.word << std::endl;
 
   std::cout << "\nSize of the trie: " << trie.getKeysCount() << std::endl;
-  std::cout << "Search for 'germany': " << trie.search("germany"sv) << std::endl;
+  std::cout << "Search for 'germany': " << trie.search("germany"sv)
+            << std::endl;
   std::cout << "Search for 'go': " << trie.search("go"sv) << std::endl;
 
   // -- }}}
@@ -338,14 +341,63 @@ int main() {
   auto intResult = ak_algos::binarySearch<int>(someInts, 3);
 
   std::cout << "Search for 'c': ";
-  if (charResult.has_value()) 
+  if (charResult.has_value())
     std::cout << charResult.value() << std::endl;
 
   std::cout << "Search for '3': ";
-  if (intResult.has_value()) 
+  if (intResult.has_value())
     std::cout << intResult.value() << std::endl;
 
   // }}}
+
+  // Graph Traversals {{{
+
+  ak_algos::AdjacencyMatrix graph = {
+      {
+          0.0f,
+          3.0f,
+          7.0f,
+          2.0f,
+          0.0f,
+      },
+      {
+          1.0f,
+          0.0f,
+          0.0f,
+          0.0f,
+          0.0f,
+      },
+      {
+          0.0f,
+          0.0f,
+          0.0f,
+          0.0f,
+          9.0f,
+      },
+      {
+          8.0f,
+          0.0f,
+          5.0f,
+          0.0f,
+          4.0f,
+      },
+      {
+          0.0f,
+          0.0f,
+          0.0f,
+          0.0f,
+          0.0f,
+      },
+  };
+
+  std::vector<int> gpath;
+  ak_algos::breadthSearch(graph, gpath, 0, 4);
+
+  for (const int &x : gpath) {
+    std::cout << x << std::endl;
+  }
+
+  // -- }}}
 
   return 0;
 }

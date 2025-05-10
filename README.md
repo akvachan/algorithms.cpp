@@ -42,16 +42,10 @@ build/Algorithms
 - BinarySearchTree
 - Trie
 
+### Graphs 
+- Graph BFS traversal on AdjacencyMatrix
 
 ## Planned
-
-### Implementations
-- Graphs
 - FibonacciHeap
 - AVLTree
 - RedBlackTree
-
-### Features
-- Templating each implementation
-- Single header file for everything
-- GNU Make build for MacOS and Linux

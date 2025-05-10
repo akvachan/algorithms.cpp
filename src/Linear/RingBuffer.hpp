@@ -33,11 +33,11 @@ public:
   int pop();
 
 private:
-  int _length;     // Current number of elements
-  int _capacity;      // Maximum capacity
-  int _readIdx;  // Index for dequeuing
-  int _writeIdx; // Index for enqueueing
-  int *_bufferArray;     // Pointer to the buffer array
+  int _length;       // Current number of elements
+  int _capacity;     // Maximum capacity
+  int _readIdx;      // Index for dequeuing
+  int _writeIdx;     // Index for enqueueing
+  int *_bufferArray; // Pointer to the buffer array
 };
 
 } // namespace ak_algos

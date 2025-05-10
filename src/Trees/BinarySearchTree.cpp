@@ -1,7 +1,6 @@
 #include "BinarySearchTree.hpp"
 
-#include <stack>
-#include <algorithm>
+#include <queue>
 
 namespace ak_algos {
 
@@ -96,7 +95,7 @@ void BinarySearchTree::insert(int value) {
     }
 }
 
-// Remove method (corrected)
+// Remove method 
 void BinarySearchTree::remove(int value) {
     BinaryNode *currentNode = _root;
     BinaryNode *previousNode = nullptr;
@@ -161,8 +160,6 @@ void BinarySearchTree::remove(int value) {
     delete currentNode;
 }
 
-// Private helper methods
-
 BinaryNode* BinarySearchTree::_getLargestChild(BinaryNode *node) const {
     if (!node->left)
         return nullptr;
@@ -209,17 +206,17 @@ void BinarySearchTree::_clear(BinaryNode *node) {
     if (!node)
         return;
 
-    std::stack<BinaryNode *> stack;
-    stack.push(node);
+    std::queue<BinaryNode *> queue;
+    queue.push(node);
 
-    while (!stack.empty()) {
-        BinaryNode *current = stack.top();
-        stack.pop();
+    while (!queue.empty()) {
+        BinaryNode *current = queue.front();
+        queue.pop();
 
         if (current->left)
-            stack.push(current->left);
+            queue.push(current->left);
         if (current->right)
-            stack.push(current->right);
+            queue.push(current->right);
 
         delete current;
     }

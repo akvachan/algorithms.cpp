@@ -1,45 +1,63 @@
-#ifndef BINARYSEARCH_H
-#define BINARYSEARCH_H
+#ifndef BINARYSEARCH_HPP
+#define BINARYSEARCH_HPP
 
 #include <array>
+#include <iterator>
 #include <optional>
 #include <string>
 #include <vector>
 
-// This is not optimal!
-// TODO Proper implementation using std::iterator.end(), std::iterator.begin()
-
-#define BINARY_SEARCH(CONTAINER, TARGET)                                       \
-  size_t beginIdx = 0;                                                         \
-  size_t endIdx = CONTAINER.size() - 1;                                        \
-  size_t middleIdx = (endIdx + beginIdx) / 2;                                  \
-  while (beginIdx < endIdx) {                                                  \
-    if (TARGET == CONTAINER[middleIdx])                                        \
-      return middleIdx;                                                        \
-    else if (TARGET < CONTAINER[middleIdx])                                    \
-      endIdx = middleIdx;                                                      \
-    else                                                                       \
-      beginIdx = middleIdx;                                                    \
-    middleIdx = (endIdx + beginIdx) / 2;                                       \
-  }                                                                            \
-  return {};
-
 namespace ak_algos {
 
-template <typename T, size_t N>
-inline std::optional<size_t> binarySearch(std::array<T, N> &array, T target) {
-  BINARY_SEARCH(array, target);
+/**
+ * @brief Generic binary search using iterators.
+ * @return Optional index of the target if found.
+ */
+template <typename RandomIt, typename T>
+std::optional<size_t> binarySearch(RandomIt begin, RandomIt end,
+                                   const T &target) {
+  auto left = begin;
+  auto right = end;
+
+  while (left < right) {
+    auto mid = left + (right - left) / 2;
+    if (*mid == target) {
+      return std::distance(begin, mid);
+    } else if (*mid < target) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  return std::nullopt;
 }
 
+/**
+ * @brief Overload for std::vector
+ */
 template <typename T>
-inline std::optional<int> binarySearch(std::vector<T> &array, T target) {
-  BINARY_SEARCH(array, target);
+inline std::optional<size_t> binarySearch(const std::vector<T> &vec,
+                                          const T &target) {
+  return binarySearch(vec.begin(), vec.end(), target);
 }
 
-inline std::optional<int> binarySearch(std::string &string, char target) {
-  BINARY_SEARCH(string, target);
+/**
+ * @brief Overload for std::array
+ */
+template <typename T, size_t N>
+inline std::optional<size_t> binarySearch(const std::array<T, N> &arr,
+                                          const T &target) {
+  return binarySearch(arr.begin(), arr.end(), target);
+}
+
+/**
+ * @brief Overload for std::string to search for a character
+ */
+inline std::optional<size_t> binarySearch(const std::string &str, char target) {
+  return binarySearch(str.begin(), str.end(), target);
 }
 
 } // namespace ak_algos
 
-#endif
+#endif // BINARYSEARCH_HPP
